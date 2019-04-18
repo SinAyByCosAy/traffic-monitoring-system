@@ -190,8 +190,8 @@ def mog1(path):
         ret, thresh = cv.threshold(fgmask, 254, 255, 0)
         cv.imshow('threshold', thresh)
 
-        # thresh = cv.GaussianBlur(thresh, (5, 5), 0)
-        # cv.imshow('blur', thresh)
+        thresh = cv.GaussianBlur(thresh, (5, 5), 0)
+        cv.imshow('blur', thresh)
         
         # kernel = cv.getStructuringElement(cv.MORPH_RECT,(5,5))
         kernel = cv.getStructuringElement(cv.MORPH_ELLIPSE,(7,7))
@@ -209,9 +209,11 @@ def mog1(path):
         opening = cv.morphologyEx(closing, cv.MORPH_OPEN, kernel)
         cv.imshow('Opening', opening)
 
-        im2, contours, hierarchy = cv.findContours(opening, cv.RETR_TREE, cv.CHAIN_APPROX_TC89_L1)
+        #im2, contours, heirarchy = cv.findContours(opening, cv.RETR_TREE, cv.CHAIN_APPROX_TC89_L1)
+        contours,hierachy=cv.findContours(thresh,cv.RETR_TREE,cv.CHAIN_APPROX_SIMPLE)
+        
         # cv.drawContours(fgmask, contours, -1, (0,255,0), 1)
-        # cv.imshow('contours', im2)
+        # cv.imshow('contours', fgmask)
 
         cv.line(frame, (0,275), (700,275), (255,0,0), 1)
         cv.line(frame, (0,230), (700,230), (255,0,0), 1)
@@ -255,11 +257,10 @@ def mog1(path):
         if k == 27:
             break
         
-        # time.sleep(0.5)
+        #time.sleep(0.5)
     
     cap.release()
     cv.destroyAllWindows()
-
 
 file_path = './traffic-dataset.mp4'
 mog1(file_path)

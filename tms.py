@@ -152,38 +152,69 @@ def processVideo(path, vehicle_list, vehicle_count):
         opening = cv.morphologyEx(closing, cv.MORPH_OPEN, kernel)
         cv.imshow('Opening', opening)
 
-        im2, contours, hierarchy = cv.findContours(opening, cv.RETR_TREE, cv.CHAIN_APPROX_TC89_L1)
+        # im2, contours, hierarchy = cv.findContours(opening, cv.RETR_TREE, cv.CHAIN_APPROX_TC89_L1)
 
-        for contour in contours:    
+        # for contour in contours:    
 
-            x, y, w, h = cv.boundingRect(contour)
+        #     x, y, w, h = cv.boundingRect(contour)
 
-            if w<25 or h<25:
-                continue
+        #     if w<25 or h<25:
+        #         continue
 
-            cx = x + int(w/2)
-            cy = y + int(h/2)
+        #     cx = x + int(w/2)# im2, contours, hierarchy = cv.findContours(opening, cv.RETR_TREE, cv.CHAIN_APPROX_TC89_L1)
 
-            if cy<175:
-                continue
+        # for contour in contours:    
 
-            newveh = {
-                'frames': 0,
-                'timein': time,
-                'pointin': (cx, cy),
-                'time': time,
-                'point': (cx, cy),
-                'distance': 0,
-                'brect': (x, y, w, h)
-            }
+        #     x, y, w, h = cv.boundingRect(contour)
+
+        #     if w<25 or h<25:
+        #         continue
+
+        #     cx = x + int(w/2)
+        #     cy = y + int(h/2)
+
+        #     if cy<175:
+        #         continue
+
+        #     newveh = {
+        #         'frames': 0,
+        #         'timein': time,
+        #         'pointin': (cx, cy),
+        #         'time': time,
+        #         'point': (cx, cy),
+        #         'distance': 0,
+        #         'brect': (x, y, w, h)
+        #     }
             
-            vehicle_list = addVehicle(newveh, vehicle_list)
+        #     vehicle_list = addVehicle(newveh, vehicle_list)
 
-        vehicle_list, vehicle_count = updateVehicleList(vehicle_list, vehicle_count)
-        # for v in vehicle_list:
-            # print(v)
-        # print(vehicle_count)
-        frame = draw(frame, vehicle_list, vehicle_count)
+        # vehicle_list, vehicle_count = updateVehicleList(vehicle_list, vehicle_count)
+        # # for v in vehicle_list:
+        #     # print(v)
+        # # print(vehicle_count)
+        # frame = draw(frame, vehicle_list, vehicle_count)
+        #     cy = y + int(h/2)
+
+        #     if cy<175:
+        #         continue
+
+        #     newveh = {
+        #         'frames': 0,
+        #         'timein': time,
+        #         'pointin': (cx, cy),
+        #         'time': time,
+        #         'point': (cx, cy),
+        #         'distance': 0,
+        #         'brect': (x, y, w, h)
+        #     }
+            
+        #     vehicle_list = addVehicle(newveh, vehicle_list)
+
+        # vehicle_list, vehicle_count = updateVehicleList(vehicle_list, vehicle_count)
+        # # for v in vehicle_list:
+        #     # print(v)
+        # # print(vehicle_count)
+        # frame = draw(frame, vehicle_list, vehicle_count)
 
         cv.imshow('frame', frame)
 
